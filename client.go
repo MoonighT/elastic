@@ -682,8 +682,8 @@ func (c *Client) sniffer() {
 	c.mu.RLock()
 	timeout := c.snifferTimeout
 	c.mu.RUnlock()
-
-	ticker := time.NewTicker(timeout)
+	interval := c.snifferInterval
+	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 
 	for {
@@ -871,8 +871,8 @@ func (c *Client) healthchecker() {
 	c.mu.RLock()
 	timeout := c.healthcheckTimeout
 	c.mu.RUnlock()
-
-	ticker := time.NewTicker(timeout)
+	interval := c.healthcheckInterval
+	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 
 	for {
