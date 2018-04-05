@@ -907,6 +907,9 @@ func (c *Client) healthcheck(timeout time.Duration, force bool) {
 	c.connsMu.RUnlock()
 
 	timeoutInMillis := int64(timeout / time.Millisecond)
+	if c.c.Timeout == 0 {
+		c.c.Timeout = timeout
+	}
 
 	for _, conn := range conns {
 		params := make(url.Values)
